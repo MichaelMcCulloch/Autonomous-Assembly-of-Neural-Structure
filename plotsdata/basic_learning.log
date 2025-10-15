@@ -1,0 +1,285 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0
+rootdir: /home/michael/Development/self-building-box/AANS
+configfile: pyproject.toml
+collected 10 items
+
+tests/integration/test_basic_learning.py Step 0: Loss=0.250000, Pred=0.000000, Target=0.500000
+Step 100: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 200: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 300: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 400: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 500: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 600: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 700: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 800: Loss=0.000000, Pred=0.500000, Target=0.500000
+Step 900: Loss=0.000000, Pred=0.500000, Target=0.500000
+
+Testing lifelong learning (continuing from trained state)...
+  Test step 0: Pred=0.500000, Error=0.000000
+  Test step 20: Pred=0.499998, Error=0.000002
+  Test step 40: Pred=0.500000, Error=0.000000
+  Test step 60: Pred=0.500000, Error=0.000000
+  Test step 80: Pred=0.500000, Error=0.000000
+
+Mean error: 0.000000
+Final error: 0.000000
+✓ PASS: Network can learn and maintain constant!
+.
+--- Constant 0.3 (500 steps) ---
+  Step 100: Recent MAE=0.000000, Target=0.300, Pred=0.300
+  Step 200: Recent MAE=0.000000, Target=0.300, Pred=0.300
+  Step 300: Recent MAE=0.000000, Target=0.300, Pred=0.300
+  Step 400: Recent MAE=0.000000, Target=0.300, Pred=0.300
+  Final 50-step MAE: 0.000000
+
+--- Constant 0.7 (500 steps) ---
+  Step 100: Recent MAE=0.000000, Target=0.700, Pred=0.700
+  Step 200: Recent MAE=0.000000, Target=0.700, Pred=0.700
+  Step 300: Recent MAE=0.000000, Target=0.700, Pred=0.700
+  Step 400: Recent MAE=0.000000, Target=0.700, Pred=0.700
+  Final 50-step MAE: 0.000000
+
+--- Sine wave (1000 steps) ---
+  Step 100: Recent MAE=0.001495, Target=0.773, Pred=0.775
+  Step 200: Recent MAE=0.005388, Target=0.273, Pred=0.277
+  Step 300: Recent MAE=0.004077, Target=0.416, Pred=0.410
+  Step 400: Recent MAE=0.002122, Target=0.797, Pred=0.798
+  Step 500: Recent MAE=0.005737, Target=0.337, Pred=0.342
+  Step 600: Recent MAE=0.002780, Target=0.339, Pred=0.334
+  Step 700: Recent MAE=0.003423, Target=0.797, Pred=0.796
+  Step 800: Recent MAE=0.005629, Target=0.414, Pred=0.419
+  Step 900: Recent MAE=0.001726, Target=0.275, Pred=0.271
+  Final 50-step MAE: 0.004647
+
+--- Fast sine (500 steps) ---
+  Step 100: Recent MAE=0.021005, Target=0.337, Pred=0.363
+  Step 200: Recent MAE=0.021377, Target=0.774, Pred=0.760
+  Step 300: Recent MAE=0.018854, Target=0.204, Pred=0.200
+  Step 400: Recent MAE=0.016950, Target=0.724, Pred=0.742
+  Final 50-step MAE: 0.017077
+
+=== Overall Performance ===
+Mean of final errors across all phases: 0.005431
+✓ PASS: AANS can track nonstationary signals online!
+.Step 0: Loss=0.000011
+Step 200: Loss=0.000243
+Step 400: Loss=0.000030
+Step 600: Loss=0.001535
+Step 800: Loss=0.000015
+Step 1000: Loss=0.040934
+Step 1200: Loss=0.001811
+Step 1400: Loss=0.000064
+Step 1600: Loss=0.001282
+Step 1800: Loss=0.013102
+
+Testing on new sequence (lifelong learning mode)...
+  Test step 0: Recent MAE=0.201726
+  Test step 40: Recent MAE=0.086366
+  Test step 80: Recent MAE=0.081005
+  Test step 120: Recent MAE=0.078245
+  Test step 160: Recent MAE=0.041186
+
+Overall MAE: 0.073271
+Final 50-step MAE: 0.042636
+✓ PASS: Network can learn and maintain one-step echo!
+.
+--- Phase 1: Slow sine (period=50) (1000 steps) ---
+  Step 100: Recent MAE=0.001495, Target=0.773, Pred=0.775
+  Step 200: Recent MAE=0.005387, Target=0.273, Pred=0.277
+  Step 300: Recent MAE=0.004077, Target=0.416, Pred=0.410
+  Step 400: Recent MAE=0.002122, Target=0.797, Pred=0.798
+  Step 500: Recent MAE=0.005737, Target=0.337, Pred=0.342
+  Step 600: Recent MAE=0.002781, Target=0.339, Pred=0.334
+  Step 700: Recent MAE=0.003423, Target=0.797, Pred=0.796
+  Step 800: Recent MAE=0.005629, Target=0.414, Pred=0.419
+  Step 900: Recent MAE=0.001726, Target=0.275, Pred=0.271
+  Initial 50-step MAE: 0.028810
+  Final 50-step MAE: 0.004647
+  Adaptation ratio: 6.20x improvement
+
+--- Phase 2: Fast sine (period=10) (500 steps) ---
+  Step 100: Recent MAE=0.021005, Target=0.337, Pred=0.363
+  Step 200: Recent MAE=0.021377, Target=0.774, Pred=0.760
+  Step 300: Recent MAE=0.018854, Target=0.204, Pred=0.200
+  Step 400: Recent MAE=0.016950, Target=0.724, Pred=0.742
+  Initial 50-step MAE: 0.023527
+  Final 50-step MAE: 0.017077
+  Adaptation ratio: 1.38x improvement
+
+--- Phase 3: Square wave (500 steps) ---
+  Step 100: Recent MAE=0.008000, Target=0.700, Pred=0.300
+  Step 200: Recent MAE=0.008000, Target=0.700, Pred=0.300
+  Step 300: Recent MAE=0.008000, Target=0.700, Pred=0.300
+  Step 400: Recent MAE=0.008000, Target=0.700, Pred=0.300
+  Initial 50-step MAE: 0.006145
+  Final 50-step MAE: 0.008000
+  Adaptation ratio: 0.77x improvement
+
+--- Phase 4: Slow sine again (500 steps) ---
+  Step 100: Recent MAE=0.001495, Target=0.773, Pred=0.775
+  Step 200: Recent MAE=0.005388, Target=0.273, Pred=0.277
+  Step 300: Recent MAE=0.004077, Target=0.416, Pred=0.410
+  Step 400: Recent MAE=0.002122, Target=0.797, Pred=0.798
+  Initial 50-step MAE: 0.008983
+  Final 50-step MAE: 0.005744
+  Adaptation ratio: 1.56x improvement
+
+--- Phase 5: Random walk (500 steps) ---
+  Step 100: Recent MAE=0.003444, Target=0.762, Pred=0.590
+  Step 200: Recent MAE=0.009129, Target=0.695, Pred=0.238
+  Step 300: Recent MAE=0.001819, Target=0.466, Pred=0.375
+  Step 400: Recent MAE=0.003350, Target=0.381, Pred=0.213
+  Initial 50-step MAE: 0.002473
+  Final 50-step MAE: 0.002419
+  Adaptation ratio: 1.02x improvement
+
+Saved distribution shift plot to test_plots/distribution_shifts.png
+
+=== Distribution Shift Performance ===
+Mean adaptation ratio across phases: 2.19x
+  Phase 1 adaptation: 6.20x (target > 5x)
+  Phase 4 adaptation: 1.56x (target < 2x)
+  Mean adaptation: 2.19x (target > 2x)
+  Max final error: 0.017077 (target < 0.15)
+✓ PASS: AANS adapts to distribution shifts!
+.
+=== Phase 1: Learn Task A (slow sine) ===
+  Step 0: MAE=0.500000
+  Step 200: MAE=0.003967
+  Step 400: MAE=0.000813
+  Step 600: MAE=0.005031
+  Step 800: MAE=0.005763
+Task A baseline performance: 0.004647
+
+=== Phase 2: Learn Task B (square wave) ===
+  Step 0: Target=0.700, Pred=0.771
+  Step 200: Target=0.700, Pred=0.300
+  Step 400: Target=0.700, Pred=0.300
+  Step 600: Target=0.700, Pred=0.300
+  Step 800: Target=0.700, Pred=0.300
+
+=== Phase 3: ZERO-SHOT test on Task A (no retraining) ===
+  Step 0: Target=0.500, Pred=0.300, Error=0.200000
+  Step 20: Target=0.617, Pred=0.300, Error=0.316825
+  Step 40: Target=0.715, Pred=0.300, Error=0.415207
+  Step 60: Target=0.780, Pred=0.300, Error=0.479612
+  Step 80: Target=0.800, Pred=0.300, Error=0.499872
+
+Task A baseline: 0.004647
+Task A zero-shot (after Task B): 0.411051
+Performance degradation: 8745.1%
+✓ PASS: Expected catastrophic forgetting observed (degradation 8745.1% > 5000%)
+.
+=== Phase 1: Initial learning of slow sine (1000 steps) ===
+Phase 1 final MAE: 0.004647
+
+=== Phase 2: Train on different tasks (2000 steps) ===
+  Step 0: learning random walk...
+  Step 500: learning random walk...
+  Step 1000: learning random walk...
+  Step 1500: learning random walk...
+
+=== Phase 3: Return to slow sine - FIRST 50 STEPS (immediate recall) ===
+  Step 0: Target=0.500, Pred=0.566
+  Step 10: Target=0.560, Pred=0.554
+  Step 20: Target=0.617, Pred=0.611
+  Step 30: Target=0.669, Pred=0.664
+  Step 40: Target=0.715, Pred=0.711
+
+=== Phase 4: Continue for 450 more steps ===
+
+=== Results ===
+Phase 1 (initial learning): 0.004647
+Phase 3 (immediate recall, first 50 steps): 0.006307
+Phase 3 (after readaptation): 0.005744
+Retention score: 98.6% (higher = better memory)
+✓ PASS: Strong immediate recall! Network retained learned patterns.
+.
+=== Learning 4 tasks simultaneously ===
+  Step 0: Task MAEs = ['0.5000', '0.5000', '0.5000', '0.5000']
+  Step 400: Task MAEs = ['0.0170', '0.0089', '0.0049', '0.0024']
+  Step 800: Task MAEs = ['0.0203', '0.0068', '0.0046', '0.0004']
+  Step 1200: Task MAEs = ['0.0212', '0.0040', '0.0036', '0.0020']
+  Step 1600: Task MAEs = ['0.0174', '0.0056', '0.0021', '0.0030']
+
+=== Final Performance (last 200 steps) ===
+  Task 1: 0.018508
+  Task 2: 0.006510
+  Task 3: 0.003067
+  Task 4: 0.002500
+
+Best task: 0.002500
+Worst task: 0.018508
+Task balance ratio: 7.40x
+✓ PASS: Successfully learned all tasks simultaneously!
+.
+=== Experiment 1: Fresh network ===
+Fresh network convergence: 52 steps
+Fresh network final MAE: 0.005744
+
+=== Experiment 2: Experienced network ===
+Training on interfering task (random walk)...
+Relearning slow sine...
+Experienced network initial MAE: 0.009156
+Experienced network convergence: 50 steps
+Experienced network final MAE: 0.005744
+
+=== Comparison ===
+Fresh network: 52 steps to converge
+Experienced network: 50 steps to converge
+Relearning speedup: 1.04x
+✓ PASS: Network retains structure (relearns 1.04x faster)
+.
+=== Rapid task switching test ===
+
+Phase 1: Task A
+  Final 50-step MAE: 0.005427
+
+Phase 2: Task B
+  Final 50-step MAE: 0.009491
+
+Phase 3: Task A
+  Final 50-step MAE: 0.005427
+
+Phase 4: Task B
+  Final 50-step MAE: 0.009491
+
+Phase 5: Task A
+  Final 50-step MAE: 0.005427
+
+Phase 6: Task B
+  Final 50-step MAE: 0.009491
+
+=== Task A performance across switches ===
+  Occurrence 1: 0.005427
+  Occurrence 2: 0.005427
+  Occurrence 3: 0.005427
+
+=== Task B performance across switches ===
+  Occurrence 1: 0.009491
+  Occurrence 2: 0.009491
+  Occurrence 3: 0.009491
+
+Task A degradation: 0.0%
+Task B degradation: 0.0%
+✓ PASS: Stable performance under rapid switching
+.
+=== Experiment 1: Task B from scratch ===
+Initial 50-step MAE: 0.030356
+Final 50-step MAE: 0.008507
+
+=== Experiment 2: Task B after learning Task A ===
+Pre-training on Task A...
+Learning Task B...
+Initial 50-step MAE: 0.009174
+Final 50-step MAE: 0.008508
+
+=== Comparison ===
+Task B from scratch - initial: 0.030356
+Task B after Task A - initial: 0.009174
+Transfer benefit: 69.8% better initial performance
+✓ PASS: Positive transfer detected (69.8% improvement)
+.
+
+============================= 10 passed in 47.61s ==============================

@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0
+rootdir: /home/michael/Development/self-building-box/AANS
+configfile: pyproject.toml
+collected 3 items
+
+tests/diagnostics/test_neurotrophic.py [GrowthPredict] Steps with growth: 569 / 10000
+[GrowthPredict] AUROC median: 0.876 | AP median: 0.010
+.[Survival] Pearson(score, lifetime) = 0.156 over 668 edges
+.[Trophic Post] Pearson: 0.9693, Spearman: 0.9330
+[Trophic Post] Saved heatmaps to: /tmp/pytest-of-michael/pytest-24/test_trophic_field_baseline0/trophic_post_heatmaps.png
+[Trophic Post] Saved scatter to: /tmp/pytest-of-michael/pytest-24/test_trophic_field_baseline0/trophic_post_scatter.png
+.
+
+=============================== warnings summary ===============================
+tests/diagnostics/test_neurotrophic.py: 569 warnings
+  /home/michael/Development/self-building-box/AANS/tests/common.py:359: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+    auc = np.trapz(tpr, fpr)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 3 passed, 569 warnings in 46.17s =======================

@@ -1,0 +1,53 @@
+==================== RUNNING TASK: NARMA ====================
+TensorBoard logs: /home/michael/.tensorboard/runs/NARMA_AANS
+Starting training (100% Teacher Forcing)...
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:11<00:00, 419.88it/s]
+Starting evaluation (Lifelong Learning - One-Step-Ahead)...
+
+Evaluating multi-step-ahead prediction...
+
+Multi-step NRMSE:
+  1-step: 0.0930
+  5-step: 0.0948
+  10-step: 0.0930
+  20-step: 0.0976
+
+--- Evaluation Results for NARMA ---
+Final MSE: 0.007372
+Final NRMSE: 0.1043
+Persistence Baseline NRMSE: 0.1429
+Skill Score: 0.2704 (better than persistence)
+
+==================== RUNNING TASK: MACKEY ====================
+TensorBoard logs: /home/michael/.tensorboard/runs/MACKEY_AANS
+Starting training (Scheduled Sampling: exponential decay)...
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:11<00:00, 422.17it/s]
+Starting evaluation (Lifelong Learning - Autonomous Rollout)...
+
+--- Evaluation Results for MACKEY ---
+Final MSE: 0.000905
+Final NRMSE: 0.1215
+Persistence Baseline NRMSE: 0.1516
+Skill Score: 0.1983 (better than persistence)
+
+==================== RUNNING TASK: LORENZ ====================
+TensorBoard logs: /home/michael/.tensorboard/runs/LORENZ_AANS
+Starting training (Scheduled Sampling: exponential decay)...
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:12<00:00, 412.72it/s]
+Starting evaluation (Lifelong Learning - Autonomous Rollout)...
+
+--- Evaluation Results for LORENZ ---
+Final MSE: 0.000085
+Final NRMSE: 0.0472
+Persistence Baseline NRMSE: 0.0778
+Skill Score: 0.3937 (better than persistence)
+
+
+==================== FINAL BENCHMARK SUMMARY ====================
+Task            NRMSE      MSE
+-------------------------------------
+NARMA           0.1043     0.007372
+MACKEY          0.1215     0.000905
+LORENZ          0.0472     0.000085
+=========================================================
+uv run python -m examples.sl_narma10 --task all --scheduled-sampling-p 1.0     56.51s user 2.53s system 114% cpu 51.347 total

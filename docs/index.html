@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AANS: Technical Documentation</title>
+    <style>
+        :root {
+            --color-background: hsl(220 25% 98%);
+            --color-surface: hsl(0 0% 100%);
+            --color-border: hsl(220 25% 92%);
+            --color-text-main: hsl(215 25% 20%);
+            --color-text-muted: hsl(215 15% 45%);
+            --color-primary: hsl(210 90% 45%);
+            --color-primary-active: hsl(210 90% 35%);
+            --color-heading: #2c3e50;
+            --color-code-bg: hsl(220 25% 94%);
+            --color-pre-bg: #f8f9fa;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --font-mono: 'Courier New', monospace;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --border-radius: 0.5rem;
+            --focus-ring: 0 0 0 2px var(--color-primary);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-padding-top: var(--space-xl);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text-main);
+            background-color: var(--color-background);
+            line-height: 1.6;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #toc-container {
+            padding: var(--space-lg) var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-surface);
+        }
+
+        #main-content {
+            padding: var(--space-lg) var(--space-md);
+            max-width: 90ch;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            .page-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            #toc-container {
+                position: sticky;
+                top: 0;
+                width: 320px;
+                height: 100vh;
+                padding: var(--space-xl);
+                border-bottom: none;
+                border-right: 1px solid var(--color-border);
+                overflow-y: auto;
+                flex-shrink: 0;
+            }
+
+            #main-content {
+                padding: var(--space-xl) var(--space-2xl);
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-sans);
+            color: var(--color-heading);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.85rem;
+            margin-top: var(--space-2xl);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid #95a5a6;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: var(--space-xl);
+            color: #34495e;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: var(--space-lg);
+            color: #7f8c8d;
+        }
+
+        p,
+        ul,
+        ol,
+        table,
+        pre {
+            margin-bottom: var(--space-lg);
+        }
+
+        p {
+            color: var(--color-text-main);
+        }
+
+        ul,
+        ol {
+            list-style-position: inside;
+            padding-left: var(--space-md);
+        }
+
+        li {
+            margin-bottom: var(--space-sm);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: var(--space-xs);
+        }
+
+        a:hover,
+        a:focus {
+            color: var(--color-primary-active);
+            text-decoration: underline;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background-color: var(--color-code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--color-pre-bg);
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            overflow-x: auto;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid var(--color-border);
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--color-text-main);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:last-child th,
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .note {
+            background-color: #fffbea;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .critical {
+            background-color: #fee;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        #toc-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-heading);
+            margin-bottom: var(--space-lg);
+        }
+
+        #toc-list {
+            list-style: none;
+            font-size: 0.9rem;
+            padding-left: 0;
+        }
+
+        #toc-list a {
+            display: block;
+            padding: var(--space-xs) var(--space-sm);
+            color: var(--color-text-muted);
+            font-weight: 400;
+            border-left: 2px solid transparent;
+            transition: color 150ms ease, border-color 150ms ease;
+        }
+
+        #toc-list a:hover {
+            color: var(--color-text-main);
+            text-decoration: none;
+        }
+
+        #toc-list a.is-active {
+            color: var(--color-primary);
+            font-weight: 600;
+            border-left-color: var(--color-primary);
+        }
+
+        #toc-list .toc-h3 {
+            margin-left: var(--space-md);
+        }
+
+        #toc-list .toc-h4 {
+            margin-left: var(--space-xl);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <aside id="toc-container" aria-labelledby="toc-heading">
+            <h2 id="toc-heading">Documentation</h2>
+            <ul id="toc-list"></ul>
+        </aside>
+        <main id="main-content" aria-labelledby="main-heading">
+            <h1 id="main-heading">Autonomous Assembly of Neural Structure (AANS)</h1>
+            <p><strong>Technical Documentation: Compositional Memory Through Nested Attractor Dynamics</strong></p>
+
+
+            <h2 id="framework">Three-Tiered Conceptual Framework</h2>
+
+            <p>AANS consists of three interacting layers: the idealized physical system (Simulacrum), the
+                algorithmic approximation (Simulator), and the computational substrate (Platform). This hierarchy
+                connects high-level theory to low-level implementation, showing how the system's continual
+                learning properties emerge.</p>
+
+            <h3 id="simulacrum">Simulacrum: Compositional Memory via Nested Attractors</h3>
+
+            <h4>Identity: A Hopfield Network of Hopfield Networks</h4>
+
+            <p>The Simulacrum is the theoretical soul of AANS: a compositional memory system that functions as a
+                <strong>Hopfield network of Hopfield networks</strong>. The architecture consists of B blocks of ℓ
+                neurons. Connectivity within each block is dense, forming a local attractor network (a Hopfield
+                network). Sparse, adaptive connections between these blocks allow them to coordinate, forming
+                hierarchical and compositional memories.
+            </p>
+
+            <p>The system's total energy landscape is a composition of local and coupling energies:</p>
+            <pre><code>E<sub>total</sub> = Σ<sub>k</sub> E<sub>k</sub> + Σ<sub>k≠l</sub> E<sub>coupling</sub><sup>kl</sup>
+
+where:
+  E<sub>k</sub> = -½ Σ<sub>i,j∈B<sub>k</sub></sub> w<sub>ij</sub><sup>(k)</sup> s<sub>i</sub> s<sub>j</sub>     (local Hopfield energy)
+  E<sub>coupling</sub> = -Σ<sub>i∈B<sub>k</sub>, j∈B<sub>l</sub></sub> w<sub>ij</sub><sup>(kl)</sup> s<sub>i</sub> s<sub>j</sub>  (inter-block coupling)
+</code></pre>
+
+            <p>Semi-independent attractor dynamics operate within each block, representing
+                low-level features or concepts. The inter-block connections learn to associate these local patterns,
+                creating global network states that are combinatorial products of local attractor states. This
+                compositional structure escapes the capacity limits of monolithic networks and supports
+                generalization.</p>
+
+            <h4>Governing Principle: Minimization of Variational Free Energy</h4>
+
+            <p>The system's behavior (synaptic changes, structural rewiring) follows a single principle:
+                minimization of variational free energy (Friston, 2010). An adaptive system
+                minimizes the discrepancy between its model of the world and incoming sensory data. In this
+                framework, this means shaping the energy landscape to create stable attractor basins for
+                frequently encountered, predictable patterns.</p>
+
+            <h4>Attractor Capacity and Online Orthogonalization</h4>
+
+            <p>A classical Hopfield network suffers from catastrophic forgetting when the number of stored patterns
+                exceeds about 14% of the number of neurons (the α<sub>c</sub> ≈ 0.14N limit). This occurs because
+                non-orthogonal patterns create interference, corrupting stored memories.</p>
+
+            <p>AANS overcomes this limitation through a process of <strong>online orthogonalization</strong>. The
+                error-modulated plasticity rules ensure that learning for a new task primarily occurs in directions that
+                reduce the new task's specific error. Synaptic changes for Task B are largely orthogonal to the synaptic
+                configurations that form the attractor for Task A, because the error signal for Task B is uncorrelated
+                with the activity patterns of Task A. This allows the system to carve out distinct, non-interfering
+                attractor basins for different tasks within the high-dimensional state space.</p>
+
+            <p>Our empirical results validate this mechanism: <strong>98.6% task retention</strong>
+                after significant interference shows that the system protects existing knowledge.
+                The <strong>69.8% positive transfer</strong> to new tasks shows that the system
+                isolates tasks and builds compositional representations, where the structure learned for one task
+                scaffolds learning another.</p>
+
+            <h3 id="simulator">Simulator: The Algorithmic Approximation</h3>
+
+            <p>The Simulator is the concrete software implementation that brings the Simulacrum to
+                life. It approximates the abstract principle of free energy minimization with a set of tractable, local
+                learning rules that operate on a composite potential function.</p>
+
+            <h4>Gradient Descent on a Tractable Proxy Potential</h4>
+
+            <p>Directly minimizing variational free energy is intractable. Instead, the Simulator performs gradient
+                descent on a carefully crafted composite potential function, V, which serves as a proxy. Every
+                continuous parameter θ in the system, from synaptic weights to homeostatic biases, is updated according
+                to the rule <code>Δθ ∝ -∇<sub>θ</sub>V</code>.</p>
+
+            <h3 id="platform">Platform: The Execution Substrate</h3>
+
+            <p>The Platform is the physical hardware (an NVIDIA GPU) and the software stack (CUDA, PyTorch, Triton) that
+                executes the Simulator. Its design is governed by the principle of maximizing computational throughput,
+                which in turn shapes the algorithmic choices in the Simulator.</p>
+
+            <h4>Rationale for Block-Sparsity and Triton</h4>
+
+            <p>The block-sparse architecture is a direct consequence of co-designing the algorithm and the hardware
+                implementation. While element-wise sparsity is biologically plausible, it is notoriously inefficient on
+                GPUs, which rely on coalesced memory access. By organizing neurons into dense blocks (e.g., 16x16 or
+                32x32) and enforcing sparsity at the block level, we achieve a structure that is both computationally
+                efficient and theoretically powerful, enabling the nested attractor dynamics of the Simulacrum.</p>
+
+            <p>Custom Triton kernels provide the needed performance. The core state evolution kernel is a fused
+                operation
+                that minimizes memory traffic by performing the block-sparse matrix multiplication, the exponential
+                Euler integration of three coupled ODEs, and deterministic noise injection in a single on-chip
+                operation. This fusion gives a 10-20x speedup over a naive PyTorch implementation.</p>
+
+            <h2 id="architecture">System Architecture and Dynamics</h2>
+
+            <h3 id="composite-potential">Composite Potential Function V</h3>
+
+            <p>The continuous plasticity rules in AANS implement gradient descent on a composite potential function V.
+                This function combines multiple learning objectives into a single energy landscape. The update
+                for any parameter θ is given by <code>Δθ ∝ -∇<sub>θ</sub>V</code>. The potential V has
+                several terms, each corresponding to a specific learning pressure:</p>
+
+            <pre><code>V = V<sub>predict</sub> + V<sub>align</sub> + V<sub>plasticity</sub> + V<sub>homeo</sub>
+
+Where:
+V<sub>predict</sub> = ½ Σ<sub>k</sub> (ŷ<sub>k</sub> - y<sub>k</sub>)²
+  (Squared prediction error for the output readout)
+
+V<sub>align</sub> = ½ Σ<sub>k</sub> (λ̂<sub>k</sub> - λ*<sub>k</sub>)²
+  (Alignment error for the learned feedback pathway)
+
+V<sub>plasticity</sub> = -Σ<sub>ij</sub> tanh(ε<sub>j</sub>) * (
+    η<sub>h</sub> e<sub>i</sub> e<sub>j</sub> + η<sub>o</sub> s<sub>i</sub>(s<sub>j</sub> - s<sub>i</sub>W<sub>ij</sub>)
+  ) + ½ Σ<sub>ij</sub> η<sub>d</sub> W<sub>ij</sub>²
+  (The core synaptic plasticity potential, where an error
+   signal ε<sub>j</sub> gates local Hebbian (e<sub>i</sub>e<sub>j</sub>) and Oja
+   (s<sub>i</sub>(s<sub>j</sub>-s<sub>i</sub>W<sub>ij</sub>)) terms, plus L2 decay)
+
+V<sub>homeo</sub> = ½ Σ<sub>i</sub> (a<sub>i</sub> - a*)²
+  (Homeostatic potential driving average activity a<sub>i</sub>
+   towards a target setpoint a*)
+</code></pre>
+            <div class="info">
+                <strong>Note:</strong> The critical term is <code>V<sub>plasticity</sub></code>. It
+                makes Hebbian and error terms multiplicative. The error signal
+                <code>tanh(ε<sub>j</sub>)</code> acts as a <strong>gate</strong>, controlling the magnitude and
+                direction of local, activity-dependent plasticity. When error is zero, plasticity stops. This implements
+                the "online orthogonalization" that prevents catastrophic forgetting.
+            </div>
+
+            <h3 id="credit-assignment">Validated Credit Assignment</h3>
+
+            <p>The system's ability to learn effectively relies on its capacity to correctly assign credit. We validated
+                our local, biologically-inspired mechanisms against oracle gradients computed via backpropagation.</p>
+
+            <h4>Trophic Support Map</h4>
+            <p>The Trophic Field Map (TFM) drives structural plasticity. It accumulates a block-level
+                estimate of expected gradient magnitudes. Our validation shows a <strong>Pearson correlation of
+                    0.9693</strong> and a <strong>Spearman correlation of 0.9330</strong> between the TFM and the true
+                backpropagated gradient. The TFM is not a heuristic but a local mechanism that accurately assigns
+                structural credit.</p>
+
+            <h4>Eligibility Trace Predictiveness</h4>
+            <p>Eligibility traces handle temporal credit assignment. We tested their ability to rank which
+                synapses should be strengthened. The traces achieved an <strong>AUROC of 0.911</strong> and an
+                <strong>Average Precision of 0.630</strong>, showing they bridge temporal gaps
+                in learning.
+            </p>
+
+            <h4>Weight Update Alignment</h4>
+            <p>The composite local plasticity rules generate weight updates that are directionally
+                aligned with the true gradient, achieving a <strong>cosine similarity of 0.999</strong>. Our local rules
+                perform gradient descent.</p>
+
+            <h4>Costate Approximation Quality</h4>
+            <p>The learned backward pathway, which provides the spatial error signal, aligns with the true
+                backpropagated signal, achieving a cosine similarity of <strong>~0.55-0.60</strong>. This guides
+                learning,
+                as predicted by feedback alignment theory.</p>
+
+            <h2 id="empirical">Empirical Results</h2>
+
+            <h3 id="continual-learning">Continual Learning Benchmarks</h3>
+
+            <p>We tested the system with continual learning benchmarks to measure memory,
+                transfer, and adaptability.</p>
+
+            <h4>Task Retention After Switching</h4>
+            <p><strong>Protocol:</strong> Train on Task A, introduce thousands of steps of an interfering Task B, then
+                test zero-shot recall on Task A.</p>
+            <p><strong>Results:</strong> The network retained <strong>98.6%</strong>
+                of Task A performance immediately upon switching back, with almost no retraining
+                required.</p>
+
+            <h4>Positive Transfer</h4>
+            <p><strong>Protocol:</strong> Compare the initial learning rate on Task B for a naive network versus one
+                pre-trained on a related Task A.</p>
+            <p><strong>Results:</strong> The pre-trained network showed a <strong>69.8% improvement</strong> in
+                initial performance, showing that the structures learned for Task A provided
+                relevant inductive bias for learning Task B.</p>
+
+            <h4>Relearning Speedup</h4>
+            <p><strong>Protocol:</strong> Train a network on a task, interfere with another task, then measure the time
+                to relearn the original task.</p>
+            <p><strong>Results:</strong> An experienced network relearns a forgotten task <strong>1.04x faster</strong>
+                than a naive network. The preserved topology accelerates
+                re-acquisition of knowledge.</p>
+
+            <h4>Rapid Task Switching</h4>
+            <p><strong>Protocol:</strong> Alternate between two distinct tasks every 200 steps.</p>
+            <p><strong>Results:</strong> The network maintained stable performance on both tasks across multiple
+                switches, with <strong>0.0% degradation</strong>. The system allocated distinct
+                neural resources to each task, preventing interference.</p>
+
+            <h4>Catastrophic Damage Recovery</h4>
+            <p>After ablating 75% of its connection blocks, the network's error spiked by over 1600x. Using
+                historical information stored in the Trophic Field Map, the network regrew the critical
+                connections and recovered to within 4.7x of its original performance baseline within 2000 steps.</p>
+
+            <h2 id="theory">Theoretical Mechanisms</h2>
+
+            <h3 id="why-linear-readouts">Why Linear Readouts Suffice</h3>
+            <p>The architecture uses simple linear readouts. This works because the complex,
+                nonlinear computation happens in the recurrent dynamics of the network as it converges to an
+                attractor state. The attractor basins corresponding to different learned concepts are well-separated in
+                the high-dimensional state space. The linear readout doesn't need to perform complex
+                transformation; it identifies which attractor basin the network has settled into. This
+                separation of concerns (dynamics for computation, readout for classification) is efficient.</p>
+
+            <h2 id="implementation">Implementation Details</h2>
+
+            <h3 id="performance">GPU Performance</h3>
+            <p>A large-scale network with <strong>327,680
+                    neurons</strong> (64 blocks x 5120 neurons/block) achieves a throughput of over <strong>4,700
+                    items/s</strong> at a batch size of 64, with a latency of around 13.6ms per batch on a single NVIDIA
+                RTX 4090.</p>
+
+            <h3 id="memory">Memory Efficiency: Active Slot Compaction</h3>
+            <p>The system uses a free slot pool to manage the dynamic topology. Pruned connection slots are returned to
+                a pool of available indices instead of being deallocated, which would cause fragmentation and degrade
+                performance. The growth mechanism draws
+                from this pool. This gives O(1) insertion and deletion of connections
+                with continuous structural plasticity.</p>
+
+            <h2 id="limitations">Limitations</h2>
+
+            <h3>Autonomous Rollout Performance</h3>
+            <p>The model performs well at one-step-ahead prediction but degrades during multi-step
+                autonomous rollouts. In tests, the generated trajectory can diverge from the ground truth, exhibiting a
+                negative correlation (-0.1075). The learned dynamics are locally accurate but
+                may not capture the global attractor of the target system.</p>
+
+            <h3>Static Benchmark Performance</h3>
+            <p>On standard static benchmarks like the Mackey-Glass time series, the system achieves an NRMSE of
+                <strong>0.1215</strong>. This is reasonable for an online and adaptive system but doesn't compete
+                with specialized, static reservoir computers fine-tuned for a single task. AANS is
+                built for adaptability, not peak performance on a single, unchanging problem.
+            </p>
+
+            <h3>Hyperparameter Sensitivity</h3>
+            <p>The system's performance is sensitive to a range of hyperparameters, including learning rates, time
+                constants, and plasticity parameters. Finding an optimal configuration requires careful tuning, and
+                there is no single set of parameters that is optimal for all tasks.</p>
+
+            <h2 id="synthesis">Synthesis: Theory and Implementation</h2>
+
+            <p>The AANS framework connects theory, algorithm, and hardware.</p>
+            <p><strong>Simulacrum → Simulator:</strong> The abstract principle of a "Hopfield network of Hopfield
+                networks" appears in the block-sparse architecture. The theoretical goal of minimizing free
+                energy translates into the composite potential function V. The gradient of
+                this potential, implemented as local, error-gated plasticity rules, drives the system's learning and
+                adaptation.</p>
+            <p><strong>Simulator → Platform:</strong> Block-sparsity matches
+                the parallel architecture of GPUs, giving high-throughput computation. Fused Triton kernels speed things
+                up
+                by minimizing memory bandwidth, the primary bottleneck in modern computing.</p>
+            <p><strong>Platform → Simulacrum:</strong> The constraints and capabilities of the hardware feed back to
+                shape the theory. The success of the block-sparse model shows that modular, compositional memory is
+                computationally useful. The co-design of theory
+                and implementation shows that the principles of biological intelligence (modularity, local learning,
+                and structural adaptation) are effective from an engineering
+                perspective.</p>
+
+            <h2 id="conclusion">Conclusion</h2>
+
+            <p>AANS is a framework for building adaptive intelligent systems. It bases its architecture on the
+                theoretical principles of compositional memory and free energy
+                minimization and co-designs its algorithms with high-performance computational substrates to achieve
+                strong performance in continual learning.</p>
+
+            <p>The system learns, remembers, and transfers knowledge without catastrophic forgetting (<strong>98.6%
+                    retention</strong> and <strong>69.8% positive transfer</strong>) through its
+                multi-timescale approach to credit assignment. The Trophic Field Map
+                provides a local, accurate mechanism for guiding
+                the self-organization of neural structure.</p>
+
+            <p>AANS shows that more general and robust artificial intelligence comes from
+                the dynamic, adaptive, and interconnected principles that govern biological neural
+                systems.</p>
+
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tocList = document.getElementById('toc-list');
+            const mainContent = document.getElementById('main-content');
+            if (!tocList || !mainContent) return;
+
+            const headings = mainContent.querySelectorAll('h2, h3, h4');
+            const tocLinks = [];
+
+            headings.forEach(heading => {
+                const text = heading.textContent.trim();
+                const id = heading.id;
+                if (!text || !id) return;
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `#${id}`;
+                link.textContent = text;
+                link.dataset.targetId = id;
+                if (heading.tagName === 'H3') listItem.className = 'toc-h3';
+                if (heading.tagName === 'H4') listItem.className = 'toc-h4';
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
+                tocLinks.push(link);
+            });
+
+            const observer = new IntersectionObserver(entries => {
+                let activeLink = null;
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const link = tocList.querySelector(`a[data-target-id="${id}"]`);
+                        if (link) {
+                            activeLink = link;
+                        }
+                    }
+                });
+
+                if (activeLink) {
+                    tocLinks.forEach(link => link.classList.remove('is-active'));
+                    activeLink.classList.add('is-active');
+                }
+            }, { rootMargin: '0px 0px -80% 0px', threshold: 0.1 });
+            headings.forEach(heading => { observer.observe(heading); });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0
+rootdir: /home/michael/Development/self-building-box/AANS
+configfile: pyproject.toml
+collected 4 items
+
+tests/integration/test_perturbation.py 
+--- [Concept Drift] Phase 1: Training on tau=17 ---
+Stable pre-perturbation MSE: 0.000147
+
+--- [Concept Drift] Phase 2: Adapting to tau=30 ---
+Initial shock MSE on tau=30: 0.000678
+Final adapted MSE on tau=30: 0.000063
+Saved concept drift plot to perturbation_plots/concept_drift_adaptation_ewma.png
+.
+--- [Continuous Eval] Running continuous evaluation ---
+Initial running NRMSE: 0.267702 (MSE: 0.004460)
+Final running NRMSE: 0.058144 (MSE: 0.000195)
+.
+--- [Perturbation] Phase 1: Training to stability ---
+Stable pre-perturbation MSE: 0.000182
+
+--- [Perturbation] Applying severe damage ---
+  - Zeroed 12/16 W_rec blocks
+  - Reduced Wout magnitude by 90%
+  - Added random noise to bias (std=0.5)
+Immediate post-perturbation MSE: 0.297693
+
+--- [Perturbation] Phase 2: Recovering from damage ---
+Final post-recovery MSE: 0.000860
+Saved perturbation recovery plot to perturbation_plots/recovery_from_perturbation_ewma.png
+.
+--- [Trivial Check] Training model ---
+
+--- [Trivial Check] Analyzing predictions ---
+Prediction std: 0.212169, Target std: 0.252739
+Mean predictor NRMSE: 1.000000 (MSE: 0.063877)
+Model NRMSE: 0.579179 (MSE: 0.021427)
+Prediction-target correlation: 0.984697
+Saved prediction plot to perturbation_plots/prediction_check.png
+.
+
+============================== 4 passed in 22.82s ==============================

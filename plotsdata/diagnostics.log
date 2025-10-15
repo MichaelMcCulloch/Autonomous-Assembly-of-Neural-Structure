@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0
+rootdir: /home/michael/Development/self-building-box/AANS
+configfile: pyproject.toml
+collected 14 items
+
+tests/diagnostics/test_eligibility.py Warning: activity_lr is 0. Activity-based homeostasis is disabled.
+[Eligibility ranking] diag_factorized: AUROC=0.911 AP=0.630 P@10%=0.569
+[Eligibility ranking] ema_s_only: AUROC=0.906 AP=0.608 P@10%=0.569
+.[Eligibility Pre] Pearson: 0.1038, Spearman: 0.1575
+[Eligibility Pre] Saved heatmaps to: /tmp/pytest-of-michael/pytest-11/test_eligibility_pre_baseline_0/eligibility_pre_heatmaps.png
+[Eligibility Lag] mean τ*=0.00, median τ*=0.00, mean |corr|=1.000
+.
+tests/diagnostics/test_feedback.py Co-state alignment (general) plot saved to: /tmp/pytest-of-michael/pytest-11/test_cs_head_alignment_general0/cs_alignment_general.png
+.Costate alignment vs MSE plot saved to: /tmp/pytest-of-michael/pytest-11/test_cs_alignment_vs_mse0/cs_alignment_vs_mse.png
+.Co-state alignment (PredictiveCoding) plot saved to: /tmp/pytest-of-michael/pytest-11/test_cs_alignment_predictive_c0/cs_alignment_pc.png
+.
+tests/diagnostics/test_input_saturation.py ..
+tests/diagnostics/test_memory_capacity_small.py [MemoryCapacity] plot saved to: /tmp/pytest-of-michael/pytest-11/test_short_horizon_memory_capa0/memory_capacity_ridge.png
+.
+tests/diagnostics/test_neurotrophic.py [GrowthPredict] Steps with growth: 569 / 10000
+[GrowthPredict] AUROC median: 0.876 | AP median: 0.010
+.[Survival] Pearson(score, lifetime) = 0.156 over 668 edges
+.[Trophic Post] Pearson: 0.9693, Spearman: 0.9330
+[Trophic Post] Saved heatmaps to: /tmp/pytest-of-michael/pytest-24/test_trophic_field_baseline0/trophic_post_heatmaps.png
+[Trophic Post] Saved scatter to: /tmp/pytest-of-michael/pytest-24/test_trophic_field_baseline0/trophic_post_scatter.png
+.
+tests/diagnostics/test_recurrent.py [ΔW surrogate (active)] Pearson=0.420 Spearman=0.992 Cosine=0.999 P@10%=0.667
+.[StateGeometry] mean d_eff=4.30, min=3.35, max=4.41
+.[JacobianMonitor] ρ mean=1.025 min=0.952 max=1.061
+.
+
+=============================== warnings summary ===============================
+tests/diagnostics/test_eligibility.py::test_eligibility_forward_mode_exact_with_ranking
+tests/diagnostics/test_eligibility.py::test_eligibility_forward_mode_exact_with_ranking
+  /home/michael/Development/self-building-box/AANS/tests/common.py:359: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+    auc = np.trapz(tpr, fpr)
+
+tests/diagnostics/test_neurotrophic.py::test_trophic_map_predicts_growth
+  /home/michael/Development/self-building-box/AANS/tests/diagnostics/test_neurotrophic.py:111: RuntimeWarning: All-NaN slice encountered
+    f"[GrowthPredict] AUROC median: {np.nanmedian(aurocs):.3f} | AP median: {np.nanmedian(aps):.3f}"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 12 passed, 2 skipped, 3 warnings in 18.00s ==================
