@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1077204047.svg)](https://doi.org/10.5281/zenodo.17363830)
+
 # Autonomous Assembly of Neural Structure (AANS)
 
 A computational framework for self-organizing recurrent neural networks. The system adapts its internal connectivity in response to environmental demands, based on principles of variational free energy minimization. The core implementation uses Triton for high-performance, block-sparse recurrent operations.
