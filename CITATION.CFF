@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Autonomous Assembly of Neural Structure"
+authors:
+  - family-names: McCulloch
+    given-names: Michael James
+    orcid: "https://orcid.org/0009-0008-9234-7189"
+version: 2510.17916
+date-released: 2025
+abstract: "Self-Evidencing Through Hierarchical Gradient Decomposition: A Dissipative System That Maintains Non-Equilibrium Steady-State by Minimizing Variational Free Energy"
+repository-code: "https://arxiv.org/abs/2510.17916"
+doi: 10.5281/zenodo.17363831
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.17363831"
+    description: "Zenodo DOI"
+  - type: other
+    value: "arXiv:2510.17916"
+    description: "arXiv preprint identifier"
+keywords:
+  - cs.NE
+  - variational free energy
+  - hierarchical gradient decomposition
+  - self-evidencing
+  - dissipative systems
+  - non-equilibrium steady-state
+  - neural architecture
+  - autonomous assembly
+license: MIT
